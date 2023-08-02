@@ -1,0 +1,18 @@
+.todo-list {
+  width: 820px;
+}
+
+.centered-box {
+ display: flex;
+ justify-content: center;
+ margin: 0 auto;
+}
+
+.complete {
+  text-decoration: line-through;
+}
+
+.active{
+
+}
+

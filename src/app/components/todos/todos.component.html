@@ -1,0 +1,137 @@
+<div class="container" style="max-width: 600px;">
+  <div class="row pt-4 mt-4 justify-content-center align-items-center centered-box" >
+      <div class="col-md-12">
+         <h1 class="text-primary"> Todo List</h1>
+      </div>
+      <div class="col-md-8">
+        <input class="form-control" #todo (input)="onAddTodo(todo.value)" placeholder="Type your tasks,then Press Enter" (keyup.enter)="onSubmitTodo()" />
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-primary" (click)="onSubmitTodo()">
+
+          Add</button>
+      </div>
+     <!--  <div class="col-md-12 pt-3 p-3" >
+        <div class="row p-2 mb-2 bg-light align-items-center  todo-list" *ngFor="let todo of todoArray;index as i">
+          <div class="col-md-10" *ngIf="!editTodo || editingIndex !== i">
+            {{todo}}
+          </div>
+          <div class="col-md-12 pt-4" *ngIf="todo.length < 0">
+              <h1>No Task Here</h1>
+          </div>
+          <div class="col-md-10" *ngIf="editTodo && editingIndex === i">
+            <input class="form-control" [formControl]="todoEditInput"/>
+            <button class="btn btn-success" (click)="onSaveEdit()">Save</button>
+            <button class="btn btn-danger" (click)="editTodo=false">Cancel</button>
+          </div>
+          <div class="col-md-2" style="cursor: pointer;">
+              <span class="material-icons text-primary" (click)="onEditTodos(i)"  data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="right" data-bs-title="Edit">
+                edit
+              </span>&nbsp;
+              <span class="material-icons text-danger" (click)="onRemoveTodo(i)"  data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="right" data-bs-title="Remove">
+                clear
+              </span>
+          </div>
+        </div>
+ -->
+
+      <div class="col-md-12">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-active" role="tabpanel" aria-labelledby="pills-active-tab">
+            <table class="table pt-4 mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Mark as Complete</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let todo of todoArray;index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <th class="justify-content-center">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" (change)="onMarkTask($event,todo,i)" id="flexCheckDefault">
+                    </div>
+                  </th>
+                  <td>
+                    <span  *ngIf="!editTodo || editingIndex !== i">{{todo}}</span>
+                    <span  *ngIf="editTodo && editingIndex === i">
+                      <input class="form-control" [formControl]="todoEditInput"/>
+                      <span class="mt-2">
+                      <button class="btn btn-success" (click)="onSaveEdit()">Save</button>&nbsp;
+                      <button class="btn btn-danger" (click)="editTodo=false">Cancel</button></span>
+                    </span>
+                    </td>
+                  <td >Active</td>
+                  <td style="cursor: pointer;">
+                    <span class="material-icons text-primary" (click)="onEditTodos(i)"  data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="right" data-bs-title="Edit">
+                    edit
+                    </span>&nbsp;
+                    <span class="material-icons text-danger" (click)="onRemoveTodo(i)"  data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="right" data-bs-title="Remove">
+                    clear
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <p  *ngIf="todoArray.length <=0" class="text-center" >No Tasks</p>
+                </tr>
+              </tbody>
+            </table>
+            <p>{{todoArray.length}} items</p>
+          </div>
+
+
+          <div class="tab-pane fade" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+            <table class="table pt-4 mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Mark as Complete</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let todo of completedTodo;index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <th class="justify-content-center">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" checked (change)="onMarkTask($event,todo,i)" id="flexCheckDefault">
+                    </div>
+                  </th>
+                  <td>
+                    <span><s>{{todo}}</s></span>
+                  </td>
+                  <td >Completed</td>
+                  <td style="cursor: pointer;">
+                    -
+                  </td>
+                </tr>
+                <tr>
+                  <p  *ngIf="todoArray.length <=0" class="text-center" >No Tasks</p>
+                </tr>
+              </tbody>
+            </table>
+            <p>{{completedTodo.length}} items</p>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-active-tab" data-toggle="pill" data-target="#pills-active" type="button" role="tab" aria-controls="pills-active" aria-selected="true">Active</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-completed-tab" data-toggle="pill" data-target="#pills-completed" type="button" role="tab" aria-controls="pills-completed" aria-selected="false">Completed</button>
+          </li>
+        </ul>
+      </div>
+  </div>
+
+
+</div>
