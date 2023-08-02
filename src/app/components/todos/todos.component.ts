@@ -13,6 +13,9 @@ export class TodosComponent implements OnInit {
   editTodo:boolean = false;
   editingIndex!:number;
   todoEditInput = new FormControl();
+  completedTodo:string[]=[];
+  checkedTasks:any;
+
   ngOnInit(){}
 
   onAddTodo(value:string){
@@ -39,17 +42,12 @@ export class TodosComponent implements OnInit {
     this.todo.nativeElement.value = "";
   }
 
-  completedTodo:string[]=[];
-  checkedTasks:any;
-  onMarkTask(e:any,todoData:string,index:number){
-    console.log(todoData);
 
+  onMarkTask(e:any,todoData:string,index:number){
     this.checkedTasks = index
     if(e.target.checked){
       this.completedTodo = [...this.completedTodo,todoData];
       setTimeout(()=>this.todoArray.splice(this.todoArray.findIndex(f => f === todoData),1),1000);
-      console.log(this.todoArray);
-
     }
   }
 }
